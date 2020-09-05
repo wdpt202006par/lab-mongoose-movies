@@ -15,6 +15,20 @@ router.get('/celebrities', (req, res, next) => {
     .catch(err => next(err))
 })
 
+router.post('/celebrities', (req, res, next) => {
+    const {name, occupation, catchPhrase} = req.body
+
+    Celebrity.create({name, occupation, catchPhrase}, {new:true})
+    .then((createdCelebrity)=>{
+        res.redirect('/celebrities')
+    })
+    .catch(
+        res.redirect('/celebrities/new')
+        //console.log("ERROR! Redirecting to new page")
+        
+    )
+})
+
 router.get('/celebrities/:id', (req, res, next) => {
     const celebid = req.params.id
     Celebrity.findById(celebid)
@@ -26,5 +40,8 @@ router.get('/celebrities/:id', (req, res, next) => {
     .catch(err=>next(err))
 })
 
+router.get('/celebrities/new', (req, res, next) => {
+    res.render('celebrities/new')
+})
 
 module.exports = router;
