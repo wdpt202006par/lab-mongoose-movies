@@ -1,6 +1,6 @@
 //iteration 1
 const mongoose = require("mongoose");
-const Celebrity = require("../models/celebrity.js");
+const Celebrity = require("../models/celebrity");
 require("../configs/db.config");
 
 const firstArray = [

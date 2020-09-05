@@ -8,7 +8,7 @@ const Celebrity = require("../models/celebrity");
 router.get("/celebrities", (req, res, next) => {
   Celebrity.find({})
     .then((allCelebritiesFromDB) => {
-      console.log(allCelebritiesFromDB);
+      console.log("here are the celebrities", allCelebritiesFromDB);
       res.render("celebrities/index", {
         celebrities: allCelebritiesFromDB,
       });
@@ -17,6 +17,16 @@ router.get("/celebrities", (req, res, next) => {
       console.log("not working", err);
       next(err);
     });
+});
+
+//iteration 3
+router.get("/celebrities/:artistId", (req, res, next) => {
+  const id = req.params.artistId;
+  Celebrity.findOne({ _id: id })
+    .then((celebrity) => {
+      res.render("celebrities/show", { celebrity: celebrity });
+    })
+    .catch((err) => next());
 });
 
 module.exports = router;
