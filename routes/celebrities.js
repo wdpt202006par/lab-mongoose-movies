@@ -11,6 +11,8 @@ Celebrity.find({
         celebritiesFromDb: celebritiesFromDb
     })
 }).catch(err => next(err))   
-}) 
+})
+
+module.exports = router;
 
 
