@@ -11,7 +11,8 @@ mongoose.connect(`mongodb://localhost/${DB_NAME}`, {
   console.log('youhouuu')
 });
 
-const celebrities  =[{
+const celebrities  =[
+  {
     name:'Bruce Willis',
     occcupation:'actor',
     catchPhrase:'Yippie-Kai-Yay, Motherfucker!'
