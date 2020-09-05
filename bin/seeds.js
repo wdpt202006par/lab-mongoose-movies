@@ -14,7 +14,7 @@ mongoose.connect(`mongodb://localhost/${DB_NAME}`, {
 const celebrities  =[
   {
     name:'Bruce Willis',
-    occcupation:'actor',
+    occupation:'actor',
     catchPhrase:'Yippie-Kai-Yay, Motherfucker!'
 },
 {
