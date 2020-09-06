@@ -5,4 +5,10 @@
   {{!-- <h5>{{occupation}}</h5>
   <p>"{{catchPhrase}}"</p> --}}
   <a href="/celebrities/{{id}}">See more</a>
+  <a href="/celebrities/{{id}}/edit">Edit</a>
+    <form action="/celebrities/{{id}}/delete" method="POST">
+      <button>Delete</button>
+    </form>
 {{/each}}
+
+<a href="/celebrities/new">Add a celebrity</a>
