@@ -15,6 +15,22 @@ router.get('/celebrities', (req,res,next) => {
         .catch(err => next(err))
 });
 
+router.get('/celebrities/new', (req,res,next) => {
+    console.log('connected!!!!')
+    // res.send('dans le formulaire')
+    res.render('celebrities/new', {})
+})
+
+router.post('/celebrities/new', (req,res,next) => {
+    const {name, occupation, catchPhrase} = req.body;
+
+    Celebrity.create({name, occupation, catchPhrase}).then(newCelebrity => {
+        res.redirect('/celebrities')
+    }).catch(err => {
+        res.redirect('/celebrities/new') // when error in form to redirect to form
+        next(err)})
+})
+
 router.get('/celebrities/:id', (req,res,next)=> {
     const id = req.params.id
     
@@ -33,18 +49,8 @@ router.get('/celebrities/:id', (req,res,next)=> {
 
 });
 
-router.get('/celebrities/new', (req,res,next) => {
-    console.log('connected!!!!')
-    res.render('celebrities/new', {})
-})
 
-// router.post('/celebrities/new', (req,res,next) => {
-//     const {name, occupation, catchPhrase} = req.body;
 
-//     Celebrity.create({name, occupation, catchPhrase}).then(newCelebrity => {
-//         res.redirect('/celebrities')
-//     }).catch(err =>next(err))
-// })
 
 
 module.exports = router;
