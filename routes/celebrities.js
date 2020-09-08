@@ -2,6 +2,31 @@ const express = require('express');
 const router  = express.Router();
 const Celebrity = require('../models/celebrity')
 
+router.get('/:id/edit', (req, res, next) => {
+	Celebrity.findById(req.params.id)
+		.then(toEdit => {
+			res.render('celebrities/edit', {
+				toEdit:toEdit
+			})
+		})
+		.catch(err => next(err))
+})
+
+router.post('/:id/edit', (req, res, next) => {
+	const {name, occupation, catchPhrase} = req.body;
+	Celebrity.findByIdAndUpdate(req.params.id, {
+		name: name, 
+		occupation: occupation, 
+		catchPhrase: catchPhrase
+	}, {new: true})
+	.then(updCeleb=> {
+		console.log('name:', updCeleb.name )
+		res.redirect(`/celebrities/${updCeleb.id}`)
+	})
+	.catch(err => next(err))
+})
+
+
 router.get('/new', (req, res, next) => {
 	res.render('celebrities/new', {})
 })
@@ -41,6 +66,7 @@ router.get('/:celebid', (req, res, next) =>{
 })
 
 router.post('/:id/delete', (req, res, next) =>{
+	console.log(id)
 	Celebrity.findByIdAndDelete(req.params.id)
 		.then(() =>{
 			res.redirect('/celebrities')
