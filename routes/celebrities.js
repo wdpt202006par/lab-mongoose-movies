@@ -30,6 +30,8 @@ router.post('/new', (req, res, next) => {
         })
 })
 
+//EDIT CELEBRITIES
+
 router.get('/:id/edit', (req, res, next) => {
     Celebrity.findById(req.params.id)
         .then((selectedCelebrity) => {
@@ -40,9 +42,26 @@ router.get('/:id/edit', (req, res, next) => {
         .catch(err => next(err))
 })
 
+router.post('/:id/edit', (req, res, next) => {
+    Celebrity.findByIdAndUpdate(req.params.id, {
+            name: req.body.name,
+            occupation: req.body.occupation,
+            catchPhrase: req.body.catchPhrase
+        }, {
+            new: true
+        })
+        .then((editedCelebrity) => {
+            console.log('JE PASSE PAR LA')
+            res.redirect('/celebrities')
+        })
+        .catch(err => next(err))
+})
+
+
+//DELETE CELEBRITIES
 
 router.post('/:id/delete', (req, res, next) => {
-    Celebrity.findByIdAndRemove(req.params.id)
+    Celebrity.findByIdAndDelete(req.params.id)
         .then(() => {
             res.redirect('/celebrities');
         })
