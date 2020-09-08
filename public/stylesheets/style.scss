@@ -1,8 +1,33 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0;
+  margin: 0;
 }
 
 a {
   color: #00B7FF;
+}
+
+.homepage {
+  background-image: url(https://www.decor-essentials.com/wp-content/uploads/2019/05/1fb481_ed9a03c8dc014f60ba65672c9274359e_mv2.jpg);
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.homepage h1,
+p {
+  color: white;
+  padding: 0;
+  margin: 0;
+}
+
+.homepage .celebrities {
+  text-decoration: none;
+  color: gold;
+  margin-right: auto;
+  margin-left: auto;
+
 }
