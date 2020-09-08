@@ -62,4 +62,8 @@ app.use('/', index);
 const celebritiesRoute = require('./routes/celebrities');
 app.use('/celebrities', celebritiesRoute) //Préfixe les routes des routeurs.
 
+// Monter le router movies
+const moviesRoute = require('./routes/movies');
+app.use('/movies', moviesRoute) //Préfixe les routes des routeurs.
+
 module.exports = app;
