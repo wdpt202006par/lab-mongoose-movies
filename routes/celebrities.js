@@ -18,7 +18,7 @@ router.get('/celebrities', (req, res, next) => {
 router.post('/celebrities', (req, res, next) => {
     const {name, occupation, catchPhrase} = req.body
 
-    Celebrity.create({name, occupation, catchPhrase}, {new:true})
+    Celebrity.create({name, occupation, catchPhrase})
     .then((createdCelebrity)=>{
         res.redirect('/celebrities')
     })
@@ -44,5 +44,12 @@ router.get('/celebrities/:id', (req, res, next) => {
     .catch(err=>next(err))
 })
 
+router.post('/celebrities/:id/delete', (req, res, next)=>{
+    Celebrity.findByIdAndRemove(req.params.id)
+    .then((removedCeleb)=>{
+        res.redirect("/celebrities")
+    })
+    .catch(err=>next(err))
+})
 
 module.exports = router;
