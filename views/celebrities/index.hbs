@@ -3,8 +3,13 @@
 <ul>
     {{#each celebrities}}
         <li>{{this.name}}</li>
-        {{!-- <a href="celebrities/show">Details</a> --}}
-        <a href="celebrities/{{id}}">DetailsID</a>
-        <a href="/celebrities/new">Create</a>
+
+        <a href="/celebrities/{{id}}">DetailsID</a>
+
+        <a href="/celebrities/new">Create your idols</a>
+
+        <form action="/celebrities/{{id}}/delete" method="POST">
+            <button>Delete</button>
+        </form>
     {{/each}}
 </ul>

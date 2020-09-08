@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 
 const Celebrity = require('../models/celebrity.js');
-const { ConnectionStates } = require('mongoose');
+const { ConnectionStates, connect } = require('mongoose');
 
 router.get('/celebrities', (req,res,next) => {
     Celebrity.find({})
@@ -34,17 +34,24 @@ router.get('/celebrities/:id', (req,res,next)=> {
 });
 
 router.get('/celebrities/new', (req,res,next) => {
-    console.log('connected!!!!')
-    res.render('celebrities/new', {})
+    res.render('celebrities/new')
 })
 
-// router.post('/celebrities/new', (req,res,next) => {
-//     const {name, occupation, catchPhrase} = req.body;
+router.post('/celebrities/new', (req,res,next) => {
+    const {name, occupation, catchPhrase} = req.body;
 
-//     Celebrity.create({name, occupation, catchPhrase}).then(newCelebrity => {
-//         res.redirect('/celebrities')
-//     }).catch(err =>next(err))
-// })
+    Celebrity.create({name, occupation, catchPhrase}).then(newCelebrity => {
+        res.redirect('/celebrities')
+    }).catch(err =>next(err))
+})
+
+router.post('/celebrities/:id/delete', (req, res) => {
+    const { id } = req.params;
+   
+    Celebrity.findByIdAndDelete(id)
+      .then(() => res.redirect('/celebrities'))
+      .catch(error => next(error));
+  });
 
 
 module.exports = router;
