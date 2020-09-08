@@ -5,17 +5,12 @@
   {{#each celebrities}}
     <div>
       <h2>  
-        <a href="/celebrities/{{id}}">{{this.name}}</a> - 
-        
-        {{!-- (<a href="/books/{{id}}/edit">Edit</a> - <form action="/books/{{id}}/delete" method="POST"><button>supprimer</button></form>) --}}
+        <a href="/celebrities/{{id}}">{{this.name}}</a> - (<a href="/celebrities/{{id}}/edit">Edit</a> - <form action="/celebrities/{{id}}/delete" method="POST"><button>delete</button></form>)
       </h2>
-
-      {{!-- <h3>{{occupation}}</h3>
-      <h4>{{catchPhrase}}</h4> --}}
     </div>
   {{/each}}
 
-  <h2>
+  <h4>
   [<a href="/celebrities/new">New Celebrity</a>]
-  </h2>
+  </h4>
 </div>

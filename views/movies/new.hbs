@@ -1,0 +1,27 @@
+<form action="/movies/add" method="POST">
+  <label>
+    Title:
+    <input type="text" name="title">
+  </label>
+ 
+  <label>
+    Genre:
+    <input type="text" name="genre">
+  </label>
+ 
+  <label>
+    Plot:
+    <input type="text" name="plot">
+  </label>
+ 
+  <label>
+    Cast:
+    <select name="celebrity" multiple>
+      {{#each celebrity}}
+        <option value="{{id}}">{{name}}</option>
+      {{/each}}
+    </select>
+    </label>
+ 
+  <button>ADD</button>
+</form>
