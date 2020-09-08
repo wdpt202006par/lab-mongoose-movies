@@ -18,30 +18,6 @@ router.post('/celebrities/new', (req, res, next) => {
     .catch(error => next(error));
 });
 
-router.post('/celebrities/:id/delete', (req, res, next) => {
-  const { id } = req.params;
-
-  Celebrity.findByIdAndDelete(id)
-  .then(celebrityFromDB => {
-    console.log(`Celebrity deleted: ${celebrityFromDB.name}.`);
-    res.redirect('/celebrities');
-  })
-  .catch(error => {
-    console.log('Error while retrieving celebrity details: ', error);
-    next(error);
-  });
-});
-
-router.get('/celebrities/:id/edit', (req, res, next) => {
-  const { id } = req.params;
-
-  Celebrity.findById(id)
-    .then((theCelebrity) => res.render('celebrities/edit', { celebrity: theCelebrity }))
-    .catch(error => {
-      console.log('Error while editing celebrity details: ', error);
-      next(error);
-    });
-});
 
 router.post('/celebrities/:id', (req, res, next) => {
   const { id } = req.params;
