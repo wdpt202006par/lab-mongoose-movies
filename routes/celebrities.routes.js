@@ -1,6 +1,25 @@
 const express = require("express");
 const router = express.Router();
 const Celebrity = require("../models/Celebrity.model");
+
+// GET /celebrities/create
+router.get("/celebrities/new", (req, res, next) => {
+  // Affichage du formulaire de creation
+  res.render("celebrities/new");
+});
+// POST /celebritiess/create
+router.post("/celebrities/new", (req, res, next) => {
+  const { name, occupation, catchPhrase } = req.body;
+  Celebrity.create({ name, occupation, catchPhrase })
+    .then((newCelebrity) => {
+      res.send(`celibitie ${newCelebrity.name} créé`);
+      res.redirect("/celebrities");
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 router.get("/celebrities/:id", (req, res, next) => {
   const { id } = req.params;
   Celebrity.findById(id)
@@ -24,21 +43,5 @@ router.get("/celebrities", (req, res, next) => {
       next(error);
     });
 });
-// GET /celebrities/create
-router.get("/celebrities/new", (req, res, next) => {
-  // Affichage du formulaire de creation
-  res.render("celebrities/new", {});
-});
-// POST /celebritiess/create
-router.post("/celebrities/new", (req, res, next) => {
-  const { name, occupation, catchPhrase } = req.body;
-  Celebrity.create({ name, occupation, catchPhrase })
-    .then((newCelebrity) => {
-      res.send(`livre ${newCelebrity.name} créé`);
-      res.redirect("/celebrities");
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
+
 module.exports = router;
