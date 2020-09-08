@@ -3,6 +3,9 @@ const router  = express.Router();
 
 const Celebrity = require('../models/celebrity.js');
 const { ConnectionStates, connect } = require('mongoose');
+const { findByIdAndUpdate } = require('../models/celebrity.js');
+
+
 
 router.get('/celebrities', (req,res,next) => {
     Celebrity.find({})
@@ -14,6 +17,30 @@ router.get('/celebrities', (req,res,next) => {
         })
         .catch(err => next(err))
 });
+
+router.get('/celebrities/:id/edit', (req, res, next)=> {
+    const id = req.params.id
+    Celebrity.findOne({_id:id})
+        .then((celebrity)=> {
+            res.render('celebrities/edit', {celebrity: celebrity})
+        })
+        .catch(error => next(error));
+})
+
+
+router.post('/celebrities/:id/edit', (req, res, next) => {
+    const {name, occupation, catchPhrase} = req.body;  
+    Celebrity.findByIdAndUpdate(req.params.id, {
+      name: name, 
+      occupation: occupation,
+      catchPhrase: catchPhrase
+    }, {new: true})
+    .then(updatedCelebrity => {
+      res.redirect(`/celebrities/${updatedCelebrity.id}`)
+    })
+    .catch(err => next(err))
+})
+
 
 router.get('/celebrities/new', (req,res,next) => {
     console.log('connected!!!!')
