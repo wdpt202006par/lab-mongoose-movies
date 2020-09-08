@@ -3,7 +3,8 @@
 {{#each celebrities}}
     <h3>{{name}}</h3>
     <a href="celebrities/{{id}}">Details</a>
-    <form action="/celebrities/new" method="GET">
-        <button>Change</button>
-    </form>
 {{/each}}
+<hr>
+<form action="/celebrities/new" method="GET">
+    <button>Add a celebrity</button>
+</form>

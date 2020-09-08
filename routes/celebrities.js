@@ -23,10 +23,14 @@ router.post('/celebrities', (req, res, next) => {
         res.redirect('/celebrities')
     })
     .catch(
-        res.redirect('/celebrities/new')
-        //console.log("ERROR! Redirecting to new page")
+        //res.redirect('/celebrities/new')
+        console.log("ERROR! Redirecting to new page")
         
     )
+})
+
+router.get('/celebrities/new', (req, res, next) => {
+    res.render('celebrities/new')
 })
 
 router.get('/celebrities/:id', (req, res, next) => {
@@ -40,8 +44,5 @@ router.get('/celebrities/:id', (req, res, next) => {
     .catch(err=>next(err))
 })
 
-router.get('/celebrities/new', (req, res, next) => {
-    res.render('celebrities/new')
-})
 
 module.exports = router;
