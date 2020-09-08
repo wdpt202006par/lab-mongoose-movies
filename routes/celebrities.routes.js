@@ -44,4 +44,13 @@ router.get("/celebrities", (req, res, next) => {
     });
 });
 
+router.post("/celebrities/:id/delete", (req, res, next) => {
+  //
+  Book.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.redirect("/celebrities");
+    })
+    .catch((err) => next(err));
+});
+
 module.exports = router;
