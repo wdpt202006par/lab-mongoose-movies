@@ -9,5 +9,5 @@ const movieSchema = new Schema({
    cast: [{ type: Schema.Types.ObjectId, ref: 'Celebrities' }],
 });
 
-const movieModel = mongoose.model('Movie', movieModel);
+const movieModel = mongoose.model('Movie', movieSchema);
 module.exports = movieModel;

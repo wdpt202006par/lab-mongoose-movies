@@ -1,0 +1,11 @@
+
+{{!-- iteration 9 --}}
+<h2>Movies index</h2>
+
+{{#each movies}}
+    <h3>{{title}}</h3> 
+    <a href="/movies/{{id}}">See details</a>  
+{{/each}}
+
+<a href="/movies/new">Create a movie</a>
+<a href="/">Go to home page</a>
