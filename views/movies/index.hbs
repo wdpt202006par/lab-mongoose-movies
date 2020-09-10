@@ -5,8 +5,9 @@
   {{#each movies}}
     <div>
       <h2> 
-          {{title}}
-        {{!-- <a href="/celebrities/{{id}}">{{this.name}}</a> - (<a href="/celebrities/{{id}}/edit">Edit</a> - <form action="/celebrities/{{id}}/delete" method="POST"><button>delete</button></form>) --}}
+        <a href="/movies/{{id}}">{{this.title}}</a> 
+        <a href="/movies/{{id}}/edit">Edit</a> 
+        <form action="/movies/{{id}}/delete" method="POST"><button>delete</button></form>
       </h2>
     </div>
   {{/each}}
