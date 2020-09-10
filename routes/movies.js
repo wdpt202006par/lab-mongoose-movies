@@ -12,13 +12,10 @@ router.get('/', (req, res, next) => {
         console.log(allMovies)
     })
     .catch(err => next(err))
-
-
 })
 
 router.get('/new', (req, res, next) => {
     Celebrity.find({})
-        .populate('Cast')
         .then((allCelebrities) => {
             res.render('movies/new', {
                 celebrities: allCelebrities
@@ -37,7 +34,20 @@ router.post('/new', (req, res, next) => {
     }).then(() => {
         res.redirect('/movies');
     })
-
 })
+
+router.get('/:id', (req, res, next) => {
+    Movie.findById(req.params.id)
+    .populate('cast')
+    .then((movieDetails) => {
+        res.render('movies/show', {
+            movie: movieDetails
+        })
+        console.log(movieDetails)
+        console.log("OK")
+    })
+    .catch(err => next(err))
+})
+
 
 module.exports = router;
