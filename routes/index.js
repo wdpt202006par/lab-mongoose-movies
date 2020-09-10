@@ -10,6 +10,19 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 
+/* GET Movie Details*/
+router.get('/movies/:id', (req, res, next) => {
+  const id = req.params.id;
+  Movie.findOne({_id: id})
+  .populate('cast')
+      .then(movieFromDB => {
+          res.render('movies/show', {
+              movie:movieFromDB
+          })
+      })
+      .catch(err => {next(err)})
+});
+/* GET Add movie*/
 router.get('/movies/new', (req, res, next) => {
   Celebrity.find({})
     .then(celebritiesFromDB => { 
@@ -17,7 +30,7 @@ router.get('/movies/new', (req, res, next) => {
       {celebrities: celebritiesFromDB})})
   .catch(err => next(err))
 })
-
+/* GET Add movie*/
 router.post('/movies/new', (req, res, next) => {
   const {title, genre, plot, cast} = req.body;
 
@@ -34,6 +47,7 @@ router.post('/movies/new', (req, res, next) => {
     .catch(err => next(err))
 })
 
+/* GET Movies list*/
 router.get('/movies', (req, res, next) => {
 
   Movie.find({})
