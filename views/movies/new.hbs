@@ -1,4 +1,6 @@
-<form action="/movies/add" method="POST">
+<h2>ADD A MOVIE</h2>
+
+<form action="/movies/new" method="POST">
   <label>
     Title:
     <input type="text" name="title">
@@ -16,8 +18,8 @@
  
   <label>
     Cast:
-    <select name="celebrity" multiple>
-      {{#each celebrity}}
+    <select name="cast" multiple>
+      {{#each celebrities}}
         <option value="{{id}}">{{name}}</option>
       {{/each}}
     </select>
