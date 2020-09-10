@@ -1,0 +1,18 @@
+<div class="page-listing">
+
+  <h1>movies</h1>
+
+  {{#each movies}}
+    <div>
+      <h2> 
+        <a href="/movies/{{id}}">{{this.title}}</a> 
+        <a href="/movies/{{id}}/edit">Edit</a> 
+        <form action="/movies/{{id}}/delete" method="POST"><button>delete</button></form>
+      </h2>
+    </div>
+  {{/each}}
+
+  <h4>
+  [<a href="/movies/new">Add New Movie</a>]
+  </h4>
+</div>
