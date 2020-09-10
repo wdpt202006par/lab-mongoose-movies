@@ -3,6 +3,7 @@ const router  = express.Router();
 
 const Celebrity = require('../models/Celebrity.model');
 
+
 router.get('/celebrities', (req, res, next) => {
     Celebrity.find({})
     .then( (allCelebrities) => {
@@ -13,6 +14,17 @@ router.get('/celebrities', (req, res, next) => {
     
     })
     .catch(err => next(err))
+})
+
+
+router.post('celebrities/:id', (req, res, next)=>{
+    const {name, occupation, catchPhrase} = req.body
+
+    Celebrity.update(req.params.id, {name, occupation, catchPhrase}, {new:true})
+    .then(updatedCeleb => {
+        redirect('/celebrities')
+    })
+    .catch(err=>next(err))  
 })
 
 router.post('/celebrities', (req, res, next) => {
@@ -43,6 +55,18 @@ router.get('/celebrities/:id', (req, res, next) => {
     })
     .catch(err=>next(err))
 })
+
+router.get('/celebrities/:id/edit', (req, res, next)=>{
+    Celebrity.findById(req.params.id)
+    .then(
+        (selectedCeleb)=>{
+            res.render('celebrities/edit',{celebrity:selectedCeleb})
+            console.log(selectedCeleb)
+        }
+    )
+    .catch(err=>next(err))
+})
+
 
 router.post('/celebrities/:id/delete', (req, res, next)=>{
     Celebrity.findByIdAndRemove(req.params.id)
