@@ -27,6 +27,12 @@ router.post('/movies', (req, res, next) => {
 })
 
 router.get('/movies', (req, res, next) =>{
-    res.send('MOVIES PAGE')
+    Movie.find()
+    .then(moviesFromDb=>{
+        res.render('movies', {
+            movies:moviesFromDb
+        })
+    })
+    .catch(err=>next(err))
 })
 module.exports = router;
