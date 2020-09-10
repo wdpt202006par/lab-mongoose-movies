@@ -18,7 +18,7 @@ router.get('/movies/new', (req, res, next) => {
 })
 
 router.post('/movies', (req, res, next) => {
-  const {title, genre, plot, cast} = req.body;
+  const {title, genre, plot, cast} = req.body; // variables
 
   Movie.create({
     title,
@@ -26,7 +26,7 @@ router.post('/movies', (req, res, next) => {
     plot,
     cast
   }).then(newMovie => {
-    res.redirect('/celebrities')
+    res.redirect('/celebrities') // Mon nouveau film est crée et sera visible sur ma page de célébrités
   }).catch(err => next(err))
 })
 
