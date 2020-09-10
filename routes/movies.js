@@ -26,4 +26,15 @@ router.post('/movies', (req, res, next) => {
 
 });
 
+router.get('/movies', (req,res,next) => {
+    Movie.find().then (allMoviesFromDb => {
+        res.render('movies/index', {movies: allMoviesFromDb})
+    }).catch(err => {
+        console.log(err);
+        next(err);
+    })
+    
+});
+
+
 module.exports = router;
