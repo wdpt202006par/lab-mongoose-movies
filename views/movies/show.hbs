@@ -2,12 +2,16 @@
     <h2>{{movie.title}}</h2>
     <p>Genre: {{movie.genre}}</p>
     <p>Plot: {{movie.plot}}</p>
-    <p>Cast: 
+    <p>Cast:
         {{!-- {{movie.cast.0.name}} --}}
 
+    <ul>
         {{#each movie.cast}}
-            {{name}}
+        <li>{{name}}</li>
         {{/each}}
-        
+    </ul>
     </p>
+    <form action="/movies/{{movie.id}}/delete" method="GET">
+        <button type="submit">Delete</button>
+    </form>
 </div>

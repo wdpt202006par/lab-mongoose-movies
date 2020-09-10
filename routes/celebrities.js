@@ -60,7 +60,7 @@ router.post('/:id/edit', (req, res, next) => {
 
 //DELETE CELEBRITIES
 
-router.post('/:id/delete', (req, res, next) => {
+router.get('/:id/delete', (req, res, next) => {
     Celebrity.findByIdAndDelete(req.params.id)
         .then(() => {
             res.redirect('/celebrities');
