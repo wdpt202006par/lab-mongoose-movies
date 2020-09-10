@@ -17,5 +17,14 @@
 
 </label>
 
+<label>
+  Cast:
+  <select multiple name="cast">
+    {{#each celebrities}}
+<option value='{{id}}'>{{name}}</option>
+    {{/each}}
+  </select>
+</label>
+
 <button>Submit</button>
 </form>
