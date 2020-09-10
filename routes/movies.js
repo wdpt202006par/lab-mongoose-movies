@@ -4,6 +4,24 @@ const router  = express.Router();
 const Celebrity = require('../models/celebrity.js');
 const Movie = require('../models/movie.js');
 
+
+router.get('/movies/:id', (req, res, next) => {
+    const id = req.params.id;
+
+    Movie.findOne({_id:id})
+    .populate('cast')
+    .then((movie) => {
+        
+        res.render('movies/show', {
+            movie: movie
+        })
+    })
+    .catch(err => {
+        console.log('error', err);
+        next(err);
+    })
+})
+
 router.get('/movies/new', (req,res,next) => {
     Celebrity.find().then (allCelebritiesFromDb => {
         res.render('movies/new', {celebrities: allCelebritiesFromDb})
