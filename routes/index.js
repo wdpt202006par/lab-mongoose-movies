@@ -1,5 +1,5 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const Movie = require('../models/Movie.js');
 const Celebrity = require('../models/Celebrity.js');
 
@@ -12,13 +12,20 @@ router.get('/', (req, res, next) => {
 router.get('/movies/new', (req, res, next) => {
 
   Celebrity.find({}).then(celebritiesFromDb => {
-    res.render('movie-create', {celebrities: celebritiesFromDb})
+    res.render('movies/movie-create', {
+      celebrities: celebritiesFromDb
+    })
   }).catch(err => next(err)) // find celebrity
 
 })
 
 router.post('/movies', (req, res, next) => {
-  const {title, genre, plot, cast} = req.body; // variables
+  const {
+    title,
+    genre,
+    plot,
+    cast
+  } = req.body; // variables
 
   Movie.create({
     title,
@@ -26,9 +33,19 @@ router.post('/movies', (req, res, next) => {
     plot,
     cast
   }).then(newMovie => {
-    res.redirect('/celebrities') // Mon nouveau film est crée et sera visible sur ma page de célébrités
+    res.redirect('/movies') // Mon nouveau film est crée et sera visible sur ma page de célébrités
   }).catch(err => next(err))
 })
+
+// Route d'affichage de la liste des fillms
+router.get('/movies', (req, res, next) => {
+  Movie.find({}).then(allMoviesFromDB => {
+    res.render('movies/index', {
+      movies: allMoviesFromDB
+    })
+  }).catch(err => next(err))
+})
+
 
 
 module.exports = router;
