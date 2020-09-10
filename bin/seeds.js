@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-const Celebrity = require("../models/celebrity.js")
+const Celebrity = require("../models/celebrity.js");
+const Movie = require("../models/movie.js");
 
 const DB_NAME = "LAB-MONGOOSE-MOVIES";
 
@@ -29,6 +30,7 @@ const celebrities= [{
     occupation: "first lady" ,
     catchPhrase: "I'm really into fashion, and there's this fascination the world over around this idea of the French woman. "
 }]
+// const allCelebrities = celebrities.map(celeb => celeb.name); 
 
 Celebrity.create(celebrities)
 .then((allCelebrity) => {

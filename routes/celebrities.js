@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const Celebrity = require('../models/celebrity')
+const Celebrity = require('../models/celebrity');
 
 router.get('/:id/edit', (req, res, next) => {
 	Celebrity.findById(req.params.id)
