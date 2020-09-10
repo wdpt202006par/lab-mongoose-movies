@@ -3,6 +3,19 @@ const router = express.Router();
 const Movie = require('../models/movie');
 const Celebrity = require('../models/celebrity');
 
+router.get('/', (req, res, next) => {
+    Movie.find({})
+    .then((allMovies) => {
+        res.render('movies/index', {
+            movies: allMovies
+        })
+        console.log(allMovies)
+    })
+    .catch(err => next(err))
+
+
+})
+
 router.get('/new', (req, res, next) => {
     Celebrity.find({})
         .populate('Cast')
