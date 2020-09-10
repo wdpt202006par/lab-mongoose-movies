@@ -4,6 +4,7 @@ const router  = express.Router();
 const Celebrity = require('../models/celebrity.js');
 const { ConnectionStates, connect } = require('mongoose');
 const { findByIdAndUpdate } = require('../models/celebrity.js');
+const movieModel = require('../models/movie.js');
 
 
 
@@ -85,5 +86,12 @@ router.post('/celebrities/:id/delete', (req, res) => {
       .catch(error => next(error));
   });
 
+  router.get('movies/:id/edit', (req,res,next) => {
+      const id = req.params.id;
+
+      movieModel.findByIdAndUpdate(id).then(movieFromDB => {
+          res.render('movies/edit', { movie : movieFromDB})
+      }).catch(error => next(error));
+  })
 
 module.exports = router;
