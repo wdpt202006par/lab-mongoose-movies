@@ -71,7 +71,7 @@ router.get('/movies/show/:id/edit', (req, res, next) => {
 			// console.log(celebritiesFromDB);
 			celebritiesFromDB.forEach((celebrity, i) => {
 				console.log(celebrity, i);
-				if(moviesFromDB.celebrity.includes(celebrity.id)){
+				if(moviesFromDB.cast.includes(celebrity.id)){
 					celebrity.selected = true
 				}
 			})
@@ -85,6 +85,9 @@ router.get('/movies/show/:id/edit', (req, res, next) => {
 
 router.post('/movies/show/:id/edit', (req, res, next) => {
 	const {title, genre, plot, cast} = req.body;
+
+	console.log('coucou',cast)
+
 	Movie.findByIdAndUpdate(req.params.id, {
 		title: title,
 		genre: genre,
@@ -92,8 +95,9 @@ router.post('/movies/show/:id/edit', (req, res, next) => {
 		cast: cast
 	}, {new: true})
 		.then(updateMovies => {
-			console.log('Update Works', updateMovies.name);
-			res.redirect(`/movies/${updateMovies.id}`)
+			console.log('Update Works', updateMovies.title);
+			//console.log(cast);
+			res.redirect(`/movies/show/${updateMovies.id}`)
 		})
 		.catch(err => next(err))
 })
