@@ -12,3 +12,5 @@ package-lock.json
 .env
 
 public/stylesheets/style.css*
+
+.DS_Store
