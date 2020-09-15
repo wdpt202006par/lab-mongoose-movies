@@ -3,5 +3,11 @@
     <li>Title: {{movie.title}}</li>
     <li>Genre: {{movie.genre}}</li>
     <li>Plot: {{movie.plot}}</li>
-    <li>Cast: {{movie.cast}}</li>
+    <li>Cast: {{#each movie.cast}} {{name}}, {{/each}}</li>
 </ul>
+<form action="/movies/{{movie.id}}/delete" method="POST">
+    <button>Delete this movie</button>
+</form>
+<a href="/{{movie.id}}/edit">Edit this movie</a
+
+<a href="/">Home page</a>
