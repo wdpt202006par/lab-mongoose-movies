@@ -14,11 +14,7 @@ router.get('/:id/edit', (req, res, next) => {
 
 router.post('/:id/edit', (req, res, next) => {
 	const {name, occupation, catchPhrase} = req.body;
-	Celebrity.findByIdAndUpdate(req.params.id, {
-		name: name, 
-		occupation: occupation, 
-		catchPhrase: catchPhrase
-	}, {new: true})
+	Celebrity.findByIdAndUpdate(req.params.id, {name, occupation, catchPhrase}, {new: true})
 	.then(updCeleb=> {
 		console.log('name:', updCeleb.name )
 		res.redirect(`/celebrities/${updCeleb.id}`)

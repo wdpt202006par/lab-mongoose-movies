@@ -5,6 +5,40 @@ const Celebrity = require('../models/celebrity');
 
 
 
+router.get('/:id/edit', (req, res, next) =>{
+    Movie.findById(req.params.id)
+    .then(toEdit =>{
+        Celebrity.find()
+        .then(celebFromDb =>{
+            celebFromDb.forEach((celeb, i)=> {
+                if(toEdit.cast.includes(celeb.id)){
+                    celeb.selected = true
+                }
+            })
+        res.render('movies/edit', {
+            toEdit,
+            celebFromDb
+        })
+        })
+        .catch(err => next(err))
+    }
+    )
+    .catch(err => next(err))
+})
+
+
+router.post('/:id/edit', (req, res, next) =>{
+    const {title, genre, plot, cast} = req.body;
+    console.log('id de movie:', id);
+    Movie.findByIdAndUpdate(req.params.id, {title, genre, plot, cast}, {new: true})
+    
+    .then(updatedMovie => {
+        res.redirect(`/movies/${updatedMovie.id}`)
+    })
+    .catch(err => next('bad way to update!',err))
+
+})
+
 
 router.get('/new', (req, res, next) => {
     // res.render('movies/new')
@@ -47,6 +81,14 @@ router.get('/:movieid', (req, res, next) => {
         res.render('movies/movie-details', {
             movie
         })
+    })
+    .catch(err => next(err))
+})
+
+router.post('/:id/delete', (req, res, next) => {
+    Movie.findByIdAndDelete(req.params.id)
+    .then(() => {
+        res.redirect('/movies')
     })
     .catch(err => next(err))
 })
