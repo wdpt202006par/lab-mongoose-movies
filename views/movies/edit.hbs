@@ -1,22 +1,25 @@
 <h2>UPDATE MOVIE</h2>
-<form  action="/movies/{{toEdit}}/edit" method="POST">
+<form  action="/movies/{{movie.id}}" method="POST">
     <label>
     Title:
-    <input type="text" name="title" value="{{toEdit.title}}">
+    <input type="text" name="title" value="{{movie.title}}">
   </label>
   <label>
     Genre:
-    <input type="text" name="genre" value="{{toEdit.genre}}">
+    <input type="text" name="genre" value="{{movie.genre}}">
   </label>
   <label>
     Plot:
-    <input type="text" name="plot" value="{{toEdit.plot}}">
+    <input type="text" name="plot" value="{{movie.plot}}">
   </label>
   Cast:
     <select name="cast" multiple>
-      {{#each celebFromDb}}
+      {{#each celebrities}}
         <option value="{{id}}" {{#if selected}}selected="selected"{{/if}}>{{name}}</option>
       {{/each}}
     </select>
+
+  
+  
   <button>Update Movie</button>
 </form>

@@ -4,42 +4,6 @@ const Movie = require('../models/movie.js');
 const Celebrity = require('../models/celebrity');
 
 
-
-router.get('/:id/edit', (req, res, next) =>{
-    Movie.findById(req.params.id)
-    .then(toEdit =>{
-        Celebrity.find()
-        .then(celebFromDb =>{
-            celebFromDb.forEach((celeb, i)=> {
-                if(toEdit.cast.includes(celeb.id)){
-                    celeb.selected = true
-                }
-            })
-        res.render('movies/edit', {
-            toEdit,
-            celebFromDb
-        })
-        })
-        .catch(err => next(err))
-    }
-    )
-    .catch(err => next(err))
-})
-
-
-router.post('/:id/edit', (req, res, next) =>{
-    const {title, genre, plot, cast} = req.body;
-    console.log('id de movie:', id);
-    Movie.findByIdAndUpdate(req.params.id, {title, genre, plot, cast}, {new: true})
-    
-    .then(updatedMovie => {
-        res.redirect(`/movies/${updatedMovie.id}`)
-    })
-    .catch(err => next('bad way to update!',err))
-
-})
-
-
 router.get('/new', (req, res, next) => {
     // res.render('movies/new')
     Celebrity.find({})
@@ -91,6 +55,40 @@ router.post('/:id/delete', (req, res, next) => {
         res.redirect('/movies')
     })
     .catch(err => next(err))
+})
+
+
+router.get('/:id/edit', (req, res, next) =>{
+    Movie.findById(req.params.id)
+    .then(movie =>{
+        Celebrity.find()
+        .then(celebrities =>{
+            celebrities.forEach((celeb, i)=> {
+                if(movie.cast.includes(celeb.id)){
+                    celeb.selected = true
+                }
+            })
+        res.render('movies/edit', {
+            movie,
+            celebrities
+        })
+        })
+        .catch(err => next(err))
+    }
+    )
+    .catch(err => next(err))
+})
+
+
+router.post('/:id', (req, res, next) =>{
+    const {title, genre, plot, cast} = req.body;
+    Movie.findByIdAndUpdate(req.params.id, {title, genre, plot, cast}, {new: true})
+    
+    .then(movie => {
+        res.redirect(`/movies/${movie.id}`)
+    })
+    .catch(err => next('bad way to update!',err))
+
 })
 
 module.exports = router;
